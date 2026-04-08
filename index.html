@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balanced Diet Planner</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <header class="fade-in">
+        <i class="fas fa-apple-alt logo-icon"></i>
+        <h1>Balanced Diet Planner</h1>
+        <p id="current-date"></p>
+    </header>
+
+    <section id="form-section" class="card fade-in">
+        <h3><i class="fas fa-user-edit"></i> Personal Details & Issues Form</h3>
+        <form id="diet-form">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Name</label>
+                    <input type="text" id="name" required placeholder="Habib Ullah Khan">
+                </div>
+                <div class="input-group">
+                    <label>DOB</label>
+                    <input type="date" id="dob" required>
+                </div>
+                <div class="input-group">
+                    <label>Gender</label>
+                    <select id="gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Food Type (Country)</label>
+                    <select id="food-type">
+                        <option value="Pakistan">Pakistan</option>
+                        <option value="India">India</option>
+                        <option value="USA">USA</option>
+                        <option value="UK">UK</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Current Weight (kg)</label>
+                    <input type="number" id="weight" step="0.1" required>
+                </div>
+                <div class="input-group">
+                    <label>Daily Walk (km)</label>
+                    <input type="number" id="walk" step="0.1" required>
+                </div>
+                <div class="input-group">
+                    <label>Primary Fat Area</label>
+                    <input type="text" id="fat-area" placeholder="e.g. Belly, Thighs">
+                </div>
+                <div class="input-group">
+                    <label>Water Intake (Liters)</label>
+                    <input type="number" id="water" step="0.1" required>
+                </div>
+            </div>
+
+            <div class="input-group full-width">
+                <label>Any Disease</label>
+                <textarea id="disease" rows="2"></textarea>
+            </div>
+
+            <div class="meals-grid">
+                <div class="input-group"><label>Breakfast Time & Food</label><input type="text" id="breakfast"></div>
+                <div class="input-group"><label>Lunch Time & Food</label><input type="text" id="lunch"></div>
+                <div class="input-group"><label>Dinner Time & Food</label><input type="text" id="dinner"></div>
+                <div class="input-group"><label>Late Night Time & Food</label><input type="text" id="late-night"></div>
+            </div>
+
+            <button type="button" id="generate-btn" class="btn-primary">
+                <i class="fas fa-magic"></i> Generate Plan
+            </button>
+        </form>
+    </section>
+
+    <section id="result-section" class="card hidden">
+        <div id="copy-area" class="printable-content">
+            <h2 class="pdf-header">Balanced Diet Planner</h2>
+            <p><strong>Date:</strong> <span id="res-date"></span></p>
+            <hr>
+            <h3>Personal Details & Issues Form</h3>
+            <table class="data-table">
+                <tr><td><strong>Name:</strong></td><td id="out-name"></td></tr>
+                <tr><td><strong>DOB:</strong></td><td id="out-dob"></td></tr>
+                <tr><td><strong>Gender:</strong></td><td id="out-gender"></td></tr>
+                <tr><td><strong>Food Type:</strong></td><td id="out-food"></td></tr>
+                <tr><td><strong>Weight:</strong></td><td id="out-weight"></td></tr>
+                <tr><td><strong>Daily Walk:</strong></td><td id="out-walk"></td></tr>
+                <tr><td><strong>Fat Area:</strong></td><td id="out-fat"></td></tr>
+                <tr><td><strong>Water:</strong></td><td id="out-water"></td></tr>
+                <tr><td><strong>Disease:</strong></td><td id="out-disease"></td></tr>
+                <tr><td><strong>Breakfast:</strong></td><td id="out-bf"></td></tr>
+                <tr><td><strong>Lunch:</strong></td><td id="out-lunch"></td></tr>
+                <tr><td><strong>Dinner:</strong></td><td id="out-dinner"></td></tr>
+                <tr><td><strong>Late Night:</strong></td><td id="out-ln"></td></tr>
+            </table>
+
+            <p class="summary-text">
+                By knowing your personal details & issues we propose what diet plan and weight you should maintain as per your gender, age, food type, current weight, primary fat areas etc.
+            </p>
+            
+            <div class="analysis-box">
+                <p>As per the data; your age is <span class="calc-val" id="calc-age">__</span>, your gender is <span class="calc-val" id="calc-gender">__</span>, food type is <span class="calc-val" id="calc-food">__</span>, current weight (kg) is <span class="calc-val" id="calc-weight">__</span>, daily walking time is <span class="calc-val" id="calc-walk">__</span>km, your primary fat areas are <span class="calc-val" id="calc-fat-list">__</span>.</p>
+                <ul>
+                    <li>So, your maintained weight goal should be <strong>____kg</strong>.</li>
+                    <li>Your maintained walking goal should be <strong>____km/steps</strong>.</li>
+                    <li>Your maintained water intake goal should be <strong>____liters</strong>.</li>
+                    <li>You have to burn <strong>____ calories</strong> daily.</li>
+                </ul>
+            </div>
+
+            <h3>Weekly Diet Plan Table</h3>
+            <table class="diet-table">
+                <thead><tr><th>Day</th><th>Time</th><th>Food & Way of Eating</th></tr></thead>
+                <tbody id="diet-rows">
+                    <tr><td>Monday</td><td></td><td></td></tr>
+                    <tr><td>Tuesday</td><td></td><td></td></tr>
+                    <tr><td>Wednesday</td><td></td><td></td></tr>
+                    <tr><td>Thursday</td><td></td><td></td></tr>
+                    <tr><td>Friday</td><td></td><td></td></tr>
+                    <tr><td>Saturday</td><td></td><td></td></tr>
+                    <tr><td>Sunday</td><td></td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="button-group">
+            <button id="copy-btn" class="btn-secondary"><i class="fas fa-copy"></i> Copy Data</button>
+        </div>
+    </section>
+
+    <!-- Page 2: Paste Area -->
+<section id="paste-section" class="card hidden fade-in">
+    <div style="text-align: center; margin-bottom: 20px;">
+        <i class="fas fa-robot logo-icon" style="color: #2a9d8f;"></i>
+        <h2>Paste AI Assisted Data Here</h2>
+    </div>
+    <div class="input-group full-width">
+        <textarea id="ai-paste-input" rows="10" placeholder="Paste the diet plan details here..."></textarea>
+    </div>
+    <button type="button" id="submit-paste-btn" class="btn-success">
+        <i class="fas fa-check-circle"></i> Submit Diet Plan
+    </button>
+</section>
+
+<!-- Page 3: Final Display -->
+<section id="final-display-section" class="card hidden fade-in">
+    <div style="text-align: center; border-bottom: 2px solid var(--primary); margin-bottom: 20px;">
+        <h2><i class="fas fa-clipboard-check"></i> Your Diet Plan & Instructions</h2>
+    </div>
+    <div id="final-plan-content" style="white-space: pre-wrap; line-height: 1.6;">
+        <!-- Pasted data will appear here -->
+    </div>
+    <button onclick="location.reload()" class="btn-secondary">Create New Plan</button>
+</section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

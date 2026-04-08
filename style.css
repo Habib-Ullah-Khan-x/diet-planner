@@ -1,0 +1,145 @@
+:root {
+    --primary: #2d6a4f;
+    --secondary: #52b788;
+    --bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --text: #1b4332;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo-icon {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+input, select, textarea {
+    padding: 10px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: var(--secondary);
+    outline: none;
+}
+
+.btn-primary, .btn-secondary, .btn-success {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+    display: inline-block;
+    transition: all 0.3s;
+}
+
+.btn-primary { background: var(--primary); color: white; }
+.btn-secondary { background: #6c757d; color: white; }
+.btn-success { background: #2a9d8f; color: white; }
+
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(45,106,79,0.3); }
+
+.hidden { display: none; }
+
+/* Animations */
+.fade-in {
+    animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Table Styles */
+.data-table, .diet-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.data-table td, .diet-table td, .diet-table th {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.diet-table th {
+    background: var(--primary);
+    color: white;
+}
+
+.calc-val {
+    color: var(--primary);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.analysis-box {
+    background: #f1f8f5;
+    padding: 20px;
+    border-left: 5px solid var(--primary);
+    margin: 20px 0;
+}
+
+
+
+#final-plan-content {
+    background: #fff;
+    padding: 20px;
+    border: 1px dashed var(--secondary);
+    border-radius: 10px;
+    font-family: 'Courier New', Courier, monospace; /* Makes it look like a report */
+    color: #333;
+}
+
+#ai-paste-input {
+    border: 2px solid var(--secondary);
+    font-family: inherit;
+    font-size: 1rem;
+}
